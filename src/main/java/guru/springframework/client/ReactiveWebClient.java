@@ -3,12 +3,10 @@ package guru.springframework.client;
 import java.math.BigDecimal;
 import java.net.URI;
 import java.util.List;
-
 import guru.springframework.domain.Product;
 import guru.springframework.server.Server;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
-
 import org.springframework.http.HttpMethod;
 import org.springframework.http.client.reactive.ReactorClientHttpConnector;
 import org.springframework.web.reactive.function.BodyInserters;
@@ -22,7 +20,6 @@ public class ReactiveWebClient {
 
 	public static final int PORT = 8080;
 	private ExchangeFunction exchange = ExchangeFunctions.create(new ReactorClientHttpConnector());
-
 	public static void main(String[] args) throws Exception {
 		ReactiveWebClient client = new ReactiveWebClient();
 		client.createProduct();
@@ -44,7 +41,4 @@ public class ReactiveWebClient {
 		Mono<List<Product>> productListMono = productList.collectList();
 		System.out.println(productListMono.block());
 	}
-
-
-
 }
