@@ -37,10 +37,12 @@ public class ProductRepositoryInMemoryImpl implements ProductRepository {
 
 	@Override
 	public Mono<Void> saveProduct(Mono<Product> productMono) {
-		return productMono.doOnNext(product -> {
+
+		Mono<Product> pMono= productMono.doOnNext(product -> {
 			int id = productMap.size() + 1;
 			productMap.put(id, product);
 			System.out.format("Saved %s with id %d%n", product, id);
-		}).thenEmpty(Mono.empty());
+		});
+		return pMono.thenEmpty(Mono.empty());
 	}
 }

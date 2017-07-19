@@ -17,7 +17,6 @@ import org.springframework.web.reactive.function.client.ExchangeFunctions;
 
 public class ReactiveWebClient {
 	public static final String HOST = "localhost";
-
 	public static final int PORT = 8080;
 	private ExchangeFunction exchange = ExchangeFunctions.create(new ReactorClientHttpConnector());
 	public static void main(String[] args) throws Exception {
