@@ -1,6 +1,7 @@
 package guru.springframework.server;
 
 import guru.springframework.handlers.ProductHandler;
+import guru.springframework.handlers.ProductHandlerImpl;
 import guru.springframework.repositories.ProductRepository;
 import guru.springframework.repositories.ProductRepositoryInMemoryImpl;
 import org.apache.catalina.Context;
@@ -34,7 +35,7 @@ public class Server {
 	}
 	public RouterFunction<ServerResponse> routingFunction() {
 		ProductRepository repository = new ProductRepositoryInMemoryImpl();
-		ProductHandler handler = new ProductHandler(repository);
+		ProductHandler handler = new ProductHandlerImpl(repository);
 		return nest(path("/product"),
 				nest(accept(APPLICATION_JSON),
 						route(GET("/{id}"), handler::getProductFromRepository)
