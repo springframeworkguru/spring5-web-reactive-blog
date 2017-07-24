@@ -1,17 +1,17 @@
 
 package guru.springframework.repositories;
 
-import java.math.BigDecimal;
-import java.util.HashMap;
-import java.util.Map;
-
 import guru.springframework.domain.Product;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+import java.math.BigDecimal;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+
 public class ProductRepositoryInMemoryImpl implements ProductRepository {
 
-    private final Map<Integer, Product> productMap = new HashMap<>();
+    private final Map<Integer, Product> productMap = new ConcurrentHashMap<>();
 
     public ProductRepositoryInMemoryImpl() {
         this.productMap.put(1, new Product(313,
@@ -19,6 +19,7 @@ public class ProductRepositoryInMemoryImpl implements ProductRepository {
                 "Spring Framework Guru White collared Shirt",
                 "https://springframework.guru/wp-content/uploads/2015/04/spring_framework_guru_shirt-rf412049699c14ba5b68bb1c09182bfa2_8nax2_512.jpg",
                 new BigDecimal("18.95")));
+
         this.productMap.put(2, new Product(512,
                 "Spring Guru Mug",
                 "Spring Framework Guru Green Cofee Mug",
