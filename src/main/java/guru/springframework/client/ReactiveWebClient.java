@@ -1,13 +1,6 @@
 package guru.springframework.client;
 
-import java.math.BigDecimal;
-import java.net.URI;
-import java.util.List;
-
 import guru.springframework.domain.Product;
-import guru.springframework.server.Server;
-import reactor.core.publisher.Flux;
-import reactor.core.publisher.Mono;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.client.reactive.ReactorClientHttpConnector;
 import org.springframework.web.reactive.function.BodyInserters;
@@ -15,6 +8,12 @@ import org.springframework.web.reactive.function.client.ClientRequest;
 import org.springframework.web.reactive.function.client.ClientResponse;
 import org.springframework.web.reactive.function.client.ExchangeFunction;
 import org.springframework.web.reactive.function.client.ExchangeFunctions;
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
+
+import java.math.BigDecimal;
+import java.net.URI;
+import java.util.List;
 
 public class ReactiveWebClient {
     public static final String HOST = "localhost";
