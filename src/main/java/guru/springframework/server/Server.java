@@ -28,7 +28,6 @@ import static org.springframework.web.reactive.function.server.RouterFunctions.t
 public class Server {
 	public static void main(String[] args) throws Exception {
 		Server server = new Server();
-		//server.startReactorServer("localhost", 8080);
 		server.startTomcatServer("localhost", 8080);
 		System.out.println("Press ENTER to exit.");
 		System.in.read();
@@ -41,13 +40,6 @@ public class Server {
 						route(GET("/{id}"), handler::getProductFromRepository)
 						.andRoute(method(HttpMethod.GET), handler::getAllProductsFromRepository)
 				).andRoute(POST("/").and(contentType(APPLICATION_JSON)), handler::saveProductToRepository));
-	}
-	public void startReactorServer(String host, int port) throws InterruptedException {
-		RouterFunction<ServerResponse> route = routingFunction();
-		HttpHandler httpHandler = toHttpHandler(route);
-		ReactorHttpHandlerAdapter adapter = new ReactorHttpHandlerAdapter(httpHandler);
-		HttpServer server = HttpServer.create(host, port);
-		server.newHandler(adapter).block();
 	}
 	public void startTomcatServer(String host, int port) throws LifecycleException {
 		RouterFunction<?> route = routingFunction();
