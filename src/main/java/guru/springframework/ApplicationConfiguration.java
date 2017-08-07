@@ -1,7 +1,6 @@
 package guru.springframework;
 
 
-
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.data.mongo.MongoDataAutoConfiguration;
@@ -17,25 +16,26 @@ import org.springframework.data.mongodb.repository.config.EnableReactiveMongoRep
 import com.mongodb.reactivestreams.client.MongoClient;
 import com.mongodb.reactivestreams.client.MongoClients;
 
-@SpringBootApplication(exclude = { MongoAutoConfiguration.class, MongoDataAutoConfiguration.class })
+@SpringBootApplication(exclude = {MongoAutoConfiguration.class, MongoDataAutoConfiguration.class})
 @EnableReactiveMongoRepositories
 @AutoConfigureAfter(EmbeddedMongoAutoConfiguration.class)
 class ApplicationConfiguration extends AbstractReactiveMongoConfiguration {
-	private final Environment environment;
+    private final Environment environment;
 
-	public ApplicationConfiguration(Environment environment){
-		this.environment=environment;
-	}
-	@Override
-	@Bean
-	@DependsOn("embeddedMongoServer")
-	public MongoClient mongoClient() {
-		int port = environment.getProperty("local.mongo.port", Integer.class);
-		return MongoClients.create(String.format("mongodb://localhost:%d", port));
-	}
+    public ApplicationConfiguration(Environment environment) {
+        this.environment = environment;
+    }
 
-	@Override
-	protected String getDatabaseName() {
-		return "reactive-mongo";
-	}
+    @Override
+    @Bean
+    @DependsOn("embeddedMongoServer")
+    public MongoClient mongoClient() {
+        int port = environment.getProperty("local.mongo.port", Integer.class);
+        return MongoClients.create(String.format("mongodb://localhost:%d", port));
+    }
+
+    @Override
+    protected String getDatabaseName() {
+        return "reactive-mongo";
+    }
 }
