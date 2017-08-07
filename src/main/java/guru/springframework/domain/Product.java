@@ -1,72 +1,57 @@
 package guru.springframework.domain;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+import org.bson.types.ObjectId;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.math.BigDecimal;
 
+@Document
 public class Product {
-    private int productId;
-    private String productName;
-    private String description;
-    private String imageUrl;
-    private BigDecimal price;
 
-    public Product(@JsonProperty("id") int productId, @JsonProperty("name") String productName, @JsonProperty("description") String description, @JsonProperty("image") String imageUrl, @JsonProperty("price") BigDecimal price) {
-        this.productId = productId;
-        this.productName = productName;
-        this.description = description;
-        this.imageUrl = imageUrl;
-        this.price = price;
-    }
+	@Id
+	private ObjectId _id;
+	private String name;
+	private String description;
+	private BigDecimal price;
+	private String imageUrl;
 
-    public int getProductId() {
-        return productId;
-    }
+	public Product(String name, String description, BigDecimal price, String imageUrl) {
+		this.name = name;
+		this.description = description;
+		this.price = price;
+		this.imageUrl = imageUrl;
+	}
 
-    public void setProductId(int productId) {
-        this.productId = productId;
-    }
+	public ObjectId getId() {
+		return _id;
+	}
 
-    public String getProductName() {
-        return productName;
-    }
+	public void setId(ObjectId id) {
+		this._id = id;
+	}
 
-    public void setProductName(String productName) {
-        this.productName = productName;
-    }
+	public String getDescription() {
+		return description;
+	}
 
-    public String getDescription() {
-        return description;
-    }
+	public void setDescription(String description) {
+		this.description = description;
+	}
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
+	public BigDecimal getPrice() {
+		return price;
+	}
 
-    public String getImageUrl() {
-        return imageUrl;
-    }
+	public void setPrice(BigDecimal price) {
+		this.price = price;
+	}
 
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
-    }
+	public String getImageUrl() {
+		return imageUrl;
+	}
 
-    public BigDecimal getPrice() {
-        return price;
-    }
-
-    public void setPrice(BigDecimal price) {
-        this.price = price;
-    }
-
-    @Override
-    public String toString() {
-        return "Product{" +
-                "productId='" + productId + '\'' +
-                ", productName='" + productName + '\'' +
-                ", description='" + description + '\'' +
-                ", imageUrl='" + imageUrl + '\'' +
-                ", price=" + price +
-                '}';
-    }
+	public void setImageUrl(String imageUrl) {
+		this.imageUrl = imageUrl;
+	}
 }
