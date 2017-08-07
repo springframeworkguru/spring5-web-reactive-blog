@@ -1,37 +1,38 @@
 package guru.springframework.domain;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Data;
+import lombok.RequiredArgsConstructor;
+import org.bson.types.ObjectId;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.math.BigDecimal;
 
+@Data
+@RequiredArgsConstructor
+@Document
 public class Product {
-	private int productId;
-	private String productName;
+
+	@Id
+	private ObjectId _id;
+	private String name;
 	private String description;
-	private String imageUrl;
 	private BigDecimal price;
+	private String imageUrl;
 
-	public Product(@JsonProperty("id")int productId, @JsonProperty("name")String productName, @JsonProperty("description") String description, @JsonProperty("image")String imageUrl, @JsonProperty("price")BigDecimal price) {
-		this.productId = productId;
-		this.productName = productName;
+	public Product(String name, String description, BigDecimal price, String imageUrl) {
+		this.name = name;
 		this.description = description;
-		this.imageUrl = imageUrl;
 		this.price = price;
-	}
-	public int getProductId() {
-		return productId;
+		this.imageUrl = imageUrl;
 	}
 
-	public void setProductId(int productId) {
-		this.productId = productId;
+	public ObjectId getId() {
+		return _id;
 	}
 
-	public String getProductName() {
-		return productName;
-	}
-
-	public void setProductName(String productName) {
-		this.productName = productName;
+	public void setId(ObjectId id) {
+		this._id = id;
 	}
 
 	public String getDescription() {
@@ -42,14 +43,6 @@ public class Product {
 		this.description = description;
 	}
 
-	public String getImageUrl() {
-		return imageUrl;
-	}
-
-	public void setImageUrl(String imageUrl) {
-		this.imageUrl = imageUrl;
-	}
-
 	public BigDecimal getPrice() {
 		return price;
 	}
@@ -58,14 +51,11 @@ public class Product {
 		this.price = price;
 	}
 
-	@Override
-	public String toString() {
-		return "Product{" +
-				"productId='" + productId + '\'' +
-				", productName='" + productName + '\'' +
-				", description='" + description + '\'' +
-				", imageUrl='" + imageUrl + '\'' +
-				", price=" + price +
-				'}';
+	public String getImageUrl() {
+		return imageUrl;
+	}
+
+	public void setImageUrl(String imageUrl) {
+		this.imageUrl = imageUrl;
 	}
 }
