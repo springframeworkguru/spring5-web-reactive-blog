@@ -1,6 +1,6 @@
 package guru.springframework;
 
-import lombok.RequiredArgsConstructor;
+
 
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -20,9 +20,12 @@ import com.mongodb.reactivestreams.client.MongoClients;
 @SpringBootApplication(exclude = { MongoAutoConfiguration.class, MongoDataAutoConfiguration.class })
 @EnableReactiveMongoRepositories
 @AutoConfigureAfter(EmbeddedMongoAutoConfiguration.class)
-@RequiredArgsConstructor
 class ApplicationConfiguration extends AbstractReactiveMongoConfiguration {
 	private final Environment environment;
+
+	public ApplicationConfiguration(Environment environment){
+		this.environment=environment;
+	}
 	@Override
 	@Bean
 	@DependsOn("embeddedMongoServer")
